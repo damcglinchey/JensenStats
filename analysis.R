@@ -35,14 +35,17 @@ gdate <- ggplot(data) +
     labs(title = paste(length(data$Gender),"Total Guesses")) + 
     geom_vline(xintercept=as.numeric(as.Date("2016-1-24")), 
                linetype = "dashed", size = 1, color = "red") +
-    annotate("text", x=as.Date("2016-2-4"), y=5.5, 
+    annotate("text", x=as.Date("2016-2-15"), y=5.5, hjust=1,
              label="Due Date: 2016-01-24", color="red", size=3) +
-    annotate("text", x=as.Date("2016-2-4"), y=5.0, 
+    annotate("text", x=as.Date("2016-2-15"), y=5.0, hjust=1,
              label=paste("Mean Guess: ", mean(data$Birthdate.Guess)), 
              color="steelblue", size=3) +
-    annotate("text", x=as.Date("2016-2-4"), y=4.5, 
+    annotate("text", x=as.Date("2016-2-15"), y=4.5, hjust=1,
              label=paste("Median Guess: ", median(data$Birthdate.Guess)), 
              color="steelblue", size=3) +
+    annotate("text", x=as.Date("2016-2-15"), y=4.0, hjust=1,
+             label=paste("Mode: ", names(tail(sort(table(data$Birthdate.Guess)),1))),
+             color="steelblue", size=3) + 
     theme_bw()
 
 ggsave(filename = "date.png",
