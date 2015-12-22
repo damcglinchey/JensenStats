@@ -6,9 +6,16 @@ data <- read.csv("data.csv", strip.white=TRUE)
 ## Turn Birthdate guesses into dates
 data$Birthdate.Guess <- as.Date(data$Birthdate.Guess, "%m/%d/%Y")
 
-## Weight as numeric in lbs (1 lb = 16 oz)
+## Weight as numeric in [lb] (1 lb = 16 oz)
+lbs <- as.numeric(sub("lb","",regmatches(data$Weight, gregexpr("[[:digit:]]+lb", data$Weight))))
+ozs <- as.numeric(sub("oz","",regmatches(data$Weight, gregexpr("[[:digit:]]+oz", data$Weight))))
+lbs[is.na(lbs)] <- 0
+ozs[is.na(ozs)] <- 0
+ozs <- ozs / 16
+w <- lbs + ozs
+data$Weight <- w
 
-## Length as numeric in in
+## Length as numeric in [in]
 l <- regmatches(data$Length,gregexpr("[[:digit:]]+\\.*[[:digit:]]*",data$Length))
 data$Length <- as.numeric(l)
 
@@ -54,6 +61,31 @@ ggsave(filename = "date.png",
        units="in")
 
 ## Plot the Weight
+gweight <- ggplot(data) + 
+    geom_histogram(aes(x=data$Weight), 
+                   fill = "steelblue", binwidth = 0.2) + 
+    xlim(5, 20) +
+    labs(x="Weight [lb]") +
+    labs(title = paste(length(data$Gender),"Total Guesses") ) + 
+    annotate("text", x=10, y=9, hjust=0,
+             label=paste("Mean:", round(mean(data$Weight, na.rm=TRUE), digits=2)),
+             color="steelblue", size=3) +
+    annotate("text", x=10, y=8.5, hjust=0,
+             label=paste("Median:", round(median(data$Weight, na.rm=TRUE), digits=2)),
+             color="steelblue", size=3) +
+    annotate("text", x=10, y=8.0, hjust=0, 
+             label=paste("Mode:", 
+                         names(table(data$Weight))[table(data$Weight) == max(table(data$Weight))]),
+             color="steelblue", size=3) +
+    annotate("text", x=10, y=7.5, hjust=0,
+             label=paste("Std. Dev.:", round(sd(data$Weight, na.rm=TRUE), digits=2)),
+             color="steelblue", size=3) +
+    theme_bw()
+
+ggsave(filename = "weight.png",
+       plot = gweight,
+       width=6.0, height=4.0,
+       units="in")
 
 ## Plot the length
 glength <- ggplot(data) + 
@@ -69,7 +101,8 @@ glength <- ggplot(data) +
              label=paste("Median:", round(median(data$Length, na.rm=TRUE), digits=2)),
              color="steelblue", size=3) +
     annotate("text", x=10, y=8.0, hjust=0, 
-             label=paste("Mode:", round(tail(sort(data$Length),1), digits=2)),
+             label=paste("Mode:", 
+                         names(table(data$Length))[table(data$Length) == max(table(data$Length))]),
              color="steelblue", size=3) +
     annotate("text", x=10, y=7.5, hjust=0,
              label=paste("Std. Dev.:", round(sd(data$Length, na.rm=TRUE), digits=2)),
