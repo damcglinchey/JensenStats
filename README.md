@@ -14,6 +14,8 @@ Participants were asked to predict the gender, birthday, weight, and length of b
 
 ### Data manipulation
 
+All data manipulation and plotting is performed in [analysis.R](https://github.com/damcglinchey/JensenStats/blob/master/analysis.R). Simply source the script to read in [data.csv](https://github.com/damcglinchey/JensenStats/blob/master/data.csv) and generate plots.
+
 - Name: No change from input
 - Birthdate.Guess: Change to class "Date" using `as.Date()`
 - Gender: No change from input
