@@ -32,3 +32,6 @@ No entries are removed. Any missing entry entered as `NA`.
 | Birthday     | 2016-1-24 | 2016-1-26 | 2016-1-20  |
 | Weight [lbs] | 8.77      | 8.97      | 8.35       |
 | Length [in]  | 19.37     | 19.11     | 19.86      |
+
+Birthdate plotted separated by Gender:
+![Birthdate](https://github.com/damcglinchey/JensenStats/blob/master/date_gender.png)
