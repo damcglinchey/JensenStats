@@ -35,3 +35,9 @@ No entries are removed. Any missing entry entered as `NA`.
 
 Birthdate plotted separated by Gender:
 ![Birthdate](https://github.com/damcglinchey/JensenStats/blob/master/date_gender.png)
+
+Weight plotted separated by Gender:
+![Weight](https://github.com/damcglinchey/JensenStats/blob/master/weight_gender.png)
+
+Length plotted separated by Gender:
+![Length](https://github.com/damcglinchey/JensenStats/blob/master/length_gender.png)
