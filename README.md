@@ -23,3 +23,12 @@ Participants were asked to predict the gender, birthday, weight, and length of b
 No entries are removed. Any missing entry entered as `NA`.
 
 ### Data summary
+
+- Total entries: 48
+- Boy: 32 (67%), Girl: 16 (33%)
+
+|     Data     | Mean(All) | Mean(Boy) | Mean(Girl) |
+|--------------|-----------|-----------|------------|
+| Birthday     | 2016-1-24 | 2016-1-26 | 2016-1-20  |
+| Weight [lbs] | 8.77      | 8.97      | 8.35       |
+| Length [in]  | 19.37     | 19.11     | 19.86      |
